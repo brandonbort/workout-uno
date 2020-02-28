@@ -16,6 +16,7 @@ public class WorkoutUno {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        Deck deck = new Deck(); 
     }
     
 }
