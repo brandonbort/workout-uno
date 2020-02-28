@@ -16,6 +16,18 @@ public class WorkoutUno {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        
+        
+        
+    Deck deck1 = new Deck();
+    Hand hand1 = new Hand();
+    //draw 7 cards from the deck and store them in array 
+    for (int i = 0; i < hand1.getHandSize(); i++){
+        if(deck1.head != null){
+            hand1.hand[i] = deck1.pop();
+        }
+    }
+    
     }
     
 }
