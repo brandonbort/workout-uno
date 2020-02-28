@@ -24,43 +24,6 @@ public class Deck {
     }
     
     
-//    static class Card { 
-//  
-//        int data; 
-//        Card next; 
-//  
-//        // Constructor 
-//        Card(int d) 
-//        { 
-//            //color;
-//            //type;
-//            data = d;
-//            next = null; 
-//        } 
-//    } 
-//    // TODO: change comments and variable names
-//    
-//    //Card head; // head of list 
-//  
-//    // Linked list Card. 
-//    // This inner class is made static 
-//    // so that main() can access it 
-//    static class Card { 
-//  
-//        int data; 
-//        Card next; 
-//  
-//        // Constructor 
-//        Card(int d) 
-//        { 
-//            //color;
-//            //type;
-//            data = d;
-//            next = null; 
-//        } 
-//    } 
-    
-    
     public Card pop() 
     { 
         // If linked list is empty 
