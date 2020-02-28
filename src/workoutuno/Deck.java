@@ -79,39 +79,26 @@ public class Deck {
     
     public void push(Card card) 
     { 
+        // Create a new node with given data 
+        Node new_node = new Node(card); 
         // If linked list is empty 
         if (head == null)
         {
-            // Create a new node with given data 
-            Node new_node = new Node(card); 
             new_node.next = null; 
+            head = new_node;
         }
+        else 
+        { 
+            // Else traverse till the last node 
+            // and insert the new_node there 
+            Node last = head; 
+            while (last.next != null) { 
+                last = last.next; 
+            } 
   
-        // Store head node 
-        Node temp = head; 
-  
-        // If head needs to be removed 
-        head = temp.next;   // Change head 
-        
-        
-        
-  
-//        // If the Linked List is empty, 
-//        // then make the new node as head 
-//        if (list.head == null) { 
-//            list.head = new_node; 
-//        } 
-//        else { 
-//            // Else traverse till the last node 
-//            // and insert the new_node there 
-//            Node last = list.head; 
-//            while (last.next != null) { 
-//                last = last.next; 
-//            } 
-//  
-//            // Insert the new_node at last node 
-//            last.next = new_node; 
-//        } 
+            // Insert the new_node at last node 
+            last.next = new_node; 
+        } 
     } 
    
 } 
