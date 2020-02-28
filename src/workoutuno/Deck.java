@@ -3,25 +3,35 @@ package workoutuno;
   
 public class Deck { 
   
-    Card head; // head of list 
-  
+    Node head; // head of list 
+    static class Node {
+        Card card;
+        Node next;
+        
+        Node(Card c)
+        {
+            card = c;
+            next = null;
+        }
+    }
+    
     // Linked list Card. 
     // This inner class is made static 
     // so that main() can access it 
-    static class Card { 
-  
-        int data; 
-        Card next; 
-  
-        // Constructor 
-        Card(int d) 
-        { 
-            //color;
-            //type;
-            data = d;
-            next = null; 
-        } 
-    } 
+//    static class Card { 
+//  
+//        int data; 
+//        Card next; 
+//  
+//        // Constructor 
+//        Card(int d) 
+//        { 
+//            //color;
+//            //type;
+//            data = d;
+//            next = null; 
+//        } 
+//    } 
     // TODO: change comments and variable names
     
     
@@ -32,13 +42,12 @@ public class Deck {
             return null; 
   
         // Store head node 
-        Card temp = head; 
+        Node temp = head; 
   
         // If head needs to be removed 
         head = temp.next;   // Change head 
         
-        
-        return temp;
+        return temp.card;
     } 
    
 } 
