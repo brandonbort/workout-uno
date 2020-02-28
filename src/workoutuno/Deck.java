@@ -9,26 +9,56 @@ package workoutuno;
 // TODO: change data to reflect card variables
 
 public class Deck { 
-  
-    Card head; // head of list 
-  
-    // Linked list Card. 
-    // This inner class is made static 
-    // so that main() can access it 
-    static class Card { 
-  
-        int data; 
-        Card next; 
-  
-        // Constructor 
-        Card(int d) 
-        { 
-            //color;
-            //type;
-            data = d;
-            next = null; 
-        } 
-    } 
+
+    Node head; // head of list
+    
+    static class Node {
+        Card card;
+        Node next;
+        
+        Node(Card c)
+        {
+            card = c;
+            next = null;
+        }
+    }
+    
+    
+//    static class Card { 
+//  
+//        int data; 
+//        Card next; 
+//  
+//        // Constructor 
+//        Card(int d) 
+//        { 
+//            //color;
+//            //type;
+//            data = d;
+//            next = null; 
+//        } 
+//    } 
+//    // TODO: change comments and variable names
+//    
+//    //Card head; // head of list 
+//  
+//    // Linked list Card. 
+//    // This inner class is made static 
+//    // so that main() can access it 
+//    static class Card { 
+//  
+//        int data; 
+//        Card next; 
+//  
+//        // Constructor 
+//        Card(int d) 
+//        { 
+//            //color;
+//            //type;
+//            data = d;
+//            next = null; 
+//        } 
+//    } 
     
     
     public Card pop() 
@@ -38,13 +68,50 @@ public class Deck {
             return null; 
   
         // Store head node 
-        Card temp = head; 
+        Node temp = head; 
   
         // If head needs to be removed 
         head = temp.next;   // Change head 
         
         
-        return temp;
+        return temp.card;
+    } 
+    
+    public void push(Card card) 
+    { 
+        // If linked list is empty 
+        if (head == null)
+        {
+            // Create a new node with given data 
+            Node new_node = new Node(card); 
+            new_node.next = null; 
+        }
+  
+        // Store head node 
+        Node temp = head; 
+  
+        // If head needs to be removed 
+        head = temp.next;   // Change head 
+        
+        
+        
+  
+//        // If the Linked List is empty, 
+//        // then make the new node as head 
+//        if (list.head == null) { 
+//            list.head = new_node; 
+//        } 
+//        else { 
+//            // Else traverse till the last node 
+//            // and insert the new_node there 
+//            Node last = list.head; 
+//            while (last.next != null) { 
+//                last = last.next; 
+//            } 
+//  
+//            // Insert the new_node at last node 
+//            last.next = new_node; 
+//        } 
     } 
    
 } 
