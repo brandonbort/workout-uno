@@ -1,6 +1,13 @@
-
+/*
+ * AUTHOR: Aaron Sloan
+ * FOR: CS 2365
+ *
+ */
 package workoutuno;
-  
+
+// TODO: change comments and variable names
+// TODO: change data to reflect card variables
+
 public class Deck { 
   
     Card head; // head of list 
@@ -22,7 +29,6 @@ public class Deck {
             next = null; 
         } 
     } 
-    // TODO: change comments and variable names
     
     
     public Card pop() 
