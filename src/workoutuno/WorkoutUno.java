@@ -37,6 +37,18 @@ public class WorkoutUno {
        //options[2] will return a 0 if the user selected to include action cards,
        //or a 1 if they chose not to
        exit(0);
+        
+        
+        
+//        Deck deck1 = new Deck();
+//        Hand hand1 = new Hand();
+//        //draw 7 cards from the deck and store them in array 
+//        for (int i = 0; i < hand1.getHandSize(); i++){
+//            if(deck1.head != null){
+//                hand1.hand[i] = deck1.pop();
+//            }
+//        }
+    
     }
     
     public static void shuffle(){
