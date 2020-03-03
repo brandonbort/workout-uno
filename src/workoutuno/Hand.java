@@ -10,18 +10,19 @@ package workoutuno;
  * @author airishimamura
  */
 public class Hand {
-    private final int HandSize = 6;  //there is no seetters because HandSize is constant value
+    private final int HandSize;  //there is no setters because HandSize is constant value
+    final Card[] hand;
     
+    public Hand(){
+        this.HandSize = 7;
+        this.hand = new Card[7];
+    }
     //getter
     public int getHandSize (){
         return HandSize;
+    }   
+    
+    public Card[] getHand(){
+        return hand;
     }
-   
-  //  Card[] hand = new Card[HandSize + 1];  //maximum array size = max index + 1 
-    
-    
-    
-   
-    
-    
 }
