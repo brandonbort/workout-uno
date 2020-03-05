@@ -17,8 +17,8 @@ public class Card {
         }
     }
     enum Type       //same as above
-    {
-        One, Two, Three, Four, Five, Six, Seven, Eight, Nine, Skip, Reverse, Draw2, Wild, Wild4;
+    {   //BRBORT- Added Zero as a type
+        Zero, One, Two, Three, Four, Five, Six, Seven, Eight, Nine, Skip, Reverse, Draw2, Wild, Wild4;
         private static final Type[]type=Type.values();
         public static Type getType(int i)
         {
