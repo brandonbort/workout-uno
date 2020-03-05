@@ -6,6 +6,7 @@
 package workoutuno;
 
 import static java.lang.System.exit;
+import java.util.Arrays;
 
 /**
  *
@@ -43,20 +44,23 @@ public class WorkoutUno {
         //of decks and adds an equal number into one giant deck
         if(options[1] == 1){
             for(int i = 1; i < options[0]; i++){
-                deck1.pushNode(addToDeck(new Deck(), options[2]).head);
+                deck1.pushDeck(addToDeck(new Deck(), options[2]));
             }
         }
-        while(deck1.head != null){
-            System.out.println(deck1.pop());
-        }
+
         Hand hand = new Hand();
         //drawHand works, just need shuffle function to work
         drawHand(hand, deck1);
-//        System.out.print("Hand : ");
-//        for(int i = 0; i < hand.getHandSize(); i++){
-//            if(i != hand.getHandSize()-1) System.out.print(hand.hand[i] + ", ");
-//            else System.out.print(hand.hand[i]);
-//        }
+        System.out.print("Hand : ");
+        for(int i = 0; i < hand.getHandSize(); i++){
+            if(i != hand.getHandSize()-1) System.out.print(hand.getHand()[i] + ", ");
+            else System.out.print(hand.getHand()[i] + "\n");
+        }
+        System.out.println("Number of cards remaining in deck: " +deck1.getCardCount());
+        while(deck1.head != null){
+            System.out.println(deck1.pop());
+        }
+        exit(0);
             
     }
     
@@ -83,7 +87,7 @@ public class WorkoutUno {
 //        //now set the Head to the Nth node we found
 //        head = temp;
     }
-    
+    //BRBORT- this will accept a hand and output it to our chosen html file
     public static void outputToHtml(Hand hand){
         
     }
@@ -94,13 +98,14 @@ public class WorkoutUno {
     public static void drawHand(Hand hand, Deck deck){
         for (int i = 0; i < hand.getHandSize(); i++){
             if(deck.head != null){
-                hand.hand[i] = deck.pop();
+                hand.setHandIndex(i, deck.pop());
             }
         }
     }
     //BRBORT- Created addToDeck() function
     //Accepts a deck and the user's choice whether to include action cards or not
     //and populates the deck with cards based on that choice
+    //if inclAct == 0, it will include action cards
     public static Deck addToDeck(Deck deck, int inclAct){
         int maxSize;
        
@@ -120,6 +125,7 @@ public class WorkoutUno {
         if(inclAct == 0){
             Card wildCard = new Card(Card.Color.Black, Card.Type.Wild);
             Card wildPlusFour = new Card(Card.Color.Black, Card.Type.Wild4);
+            //theres four of each wild card and plus4 so iterate 4 times
             for(int i = 0; i < 4; i++){
                 deck.push(wildCard);
                 deck.push(wildPlusFour);
