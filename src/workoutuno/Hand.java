@@ -28,6 +28,10 @@ public class Hand {
     public Card[] getHand(){
         return hand;
     }
+    //getter
+    public int getHandSize(){
+        return HandSize;
+    }   
     
     public void setHandIndex(int index, Card card){
         this.hand[index] = card;
@@ -79,3 +83,4 @@ public class Hand {
             }
     }        
 }
+
