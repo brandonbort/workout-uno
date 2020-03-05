@@ -11,8 +11,9 @@ package workoutuno;
  */
 public class Hand {
     private final int HandSize;  //there is no setters because HandSize is constant value
-    final Card[] hand;
+    private final Card[] hand;
     
+    //constructor
     public Hand(){
         this.HandSize = 7;
         this.hand = new Card[7];
@@ -25,4 +26,54 @@ public class Hand {
     public Card[] getHand(){
         return hand;
     }
+    
+    public void setHandIndex(int index, Card card){
+        this.hand[index] = card;
+    }
+//    public void setHand( newHand){
+//        this.hand = newHand;
+//    }
+    //will sort this.hand first by color, and then by face value
+    public void sortHand(){
+        this.sortColor(0, new Hand(), 0);
+        this.sortType(0, new Hand(), 0);
+    }
+    //recursive function that will sort by color
+    public void sortColor(int color, Hand newHand, int handIndex){
+        Card[] tempHand = getHand();
+        int i = 0;
+        while(tempHand[i] != null){
+            if(tempHand[i].getColor() == Card.Color.getColor(color)){
+                newHand.setHandIndex(handIndex, tempHand[i]);
+                handIndex++;
+            }
+            i++;
+        }
+        //sorts by the next color if there is another one
+        if(color < 4) sortColor(color++, newHand, handIndex);
+        else{
+            for(int x = 0; x < newHand.getHandSize(); x++){
+                this.setHandIndex(x, newHand.getHand()[x]);
+            }
+        }
+    }
+    //recursive for setting by type
+    public void sortType(int type, Hand newHand, int index){
+        Card[] tempHand = getHand();
+        int i = 0;
+        while(tempHand[i] != null){
+            if(tempHand[i].getType() == Card.Type.getType(type)){
+                newHand.setHandIndex(index, tempHand[i]);
+                index++;
+            }
+            i++;
+        }
+        
+        if(type <= 14) sortType(type++, newHand, index);
+        else{
+            for(int x = 0; x < newHand.getHandSize(); x++){
+                this.setHandIndex(x, newHand.getHand()[x]);
+            }
+        }
+    }        
 }
