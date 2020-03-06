@@ -18,12 +18,33 @@ public class Deck {
     static class Node {
         Card card;
         Node next;
+        Node prev;
         
         Node(Card c)
         {
             card = c;
             next = null;
+            prev = null;
         }
+        
+        public Node getPrev() {
+            return this.prev;
+        }
+
+        public Node getNext() {
+            return this.next;
+        }
+        
+        public void setPrev(Node prevN) {
+            this.prev = prevN;
+        }
+        
+        public void setNext(Node nextN) {  
+            this.next = nextN;
+        }
+        
+        
+    
     }
     
     
@@ -38,6 +59,8 @@ public class Deck {
   
         // If head needs to be removed 
         head = temp.next;   // Change head 
+        head.prev = null;   // prev pointer set to null
+        
         //removes one from the cardCount
         setCardCount(-1);
         
@@ -52,6 +75,7 @@ public class Deck {
         if (head == null)
         {
             new_node.next = null; 
+            new_node.prev = null;
             head = new_node;
         }
         else 
@@ -59,12 +83,15 @@ public class Deck {
             // Else traverse till the last node 
             // and insert the new_node there 
             Node last = head; 
+            Node temp = null; // going to be used for the prev pointer
             while (last.next != null) { 
+                temp = last; 
                 last = last.next; 
             } 
   
             // Insert the new_node at last node 
-            last.next = new_node; 
+            last.next = new_node;
+            last.prev = temp;
         }
         setCardCount(1);
     } 
