@@ -53,14 +53,13 @@ public class Deck {
         // If linked list is empty 
         if (head == null) 
             return null; 
-  
+ 
+        head.setPrev(null);// prev pointer set to 
         // Store head node 
         Node temp = head; 
   
-        // If head needs to be removed 
+         // If head needs to be removed 
         head = temp.next;   // Change head 
-        head.prev = null;   // prev pointer set to null
-        
         //removes one from the cardCount
         setCardCount(-1);
         
