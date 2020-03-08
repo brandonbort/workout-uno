@@ -278,7 +278,7 @@ public class WorkoutUno {
                         type[color] += 9;
                         break;
                     case Skip:
-                        skipNumber += type[color];        //count how many there r to skip
+                        totalSkipped += type[color];        //count how many there r to skip
                         type[color] = 0;                 //nark all of this workout
                         break;
                     case Draw2:
@@ -295,8 +295,8 @@ public class WorkoutUno {
                         type[3] *= 4;
                     }
                     break;
-                    
                 }
+                 
             }
         }
         result += "<br />Lunges:        " + type[0]
@@ -306,7 +306,7 @@ public class WorkoutUno {
                 + "<br />Burpees:       " + type[4]
                 + "<br />Break Time:    " + breakTime;
         exerciseTotal += type[0] + type[1] + type[2] + type[3] + type[4];
-        totalSkipped += skipNumber;
+       
         
         totalLunge += type[0];
         if (maxLunge <type[0])
