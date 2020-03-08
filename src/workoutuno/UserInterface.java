@@ -19,6 +19,7 @@ class UserInterface extends JFrame{
     public void getOptions(int[] options, Object lock){
 
         UserInterface parFrame = new UserInterface();
+        parFrame.setLocationRelativeTo(null);//pops the ui in the center of screen
         
         //creating a user interface 
         JPanel child = new JPanel();
