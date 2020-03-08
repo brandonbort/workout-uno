@@ -59,9 +59,6 @@ public class WorkoutUno {
             drawHand(hand, deck1);
             hand.sortHand();
 
-            for(int x = 0; x < hand.getHandSize(); x++){
-                System.out.println( hand.getHand()[x]);
-            }
             outputString += stringifyHand(hand) + "<br/>Cards remaining in deck: " +
                             deck1.getCardCount() + "<br/>";
         }
@@ -70,11 +67,7 @@ public class WorkoutUno {
         } catch (FileNotFoundException ex) {
             System.out.println("Could not find output file.");
         }
-        
-//        System.out.println("Number of cards remaining in deck: " +deck1.getCardCount());
-//        while(deck1.head != null){
-//            System.out.println(deck1.pop());
-//        }
+
         exit(0);
             
     }
