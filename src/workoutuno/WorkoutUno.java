@@ -69,7 +69,7 @@ public class WorkoutUno {
         Hand hand = new Hand();
         //drawHand works, just need shuffle function to work
         shuffle(deck1);
-
+        outputString += "<br/><font size = \"+2\"> Deck 1! </font>";
         while (deck1.head != null) {
 
             drawHand(hand, deck1);
@@ -77,26 +77,20 @@ public class WorkoutUno {
 
             outputString += "<br/>Sorted Hand: " + stringifyHand(hand) + "<br/>Cards remaining in deck: "
                     + deck1.getCardCount() + getWorkout(hand, deck1) + "<br/>";
+            if(deck1.head == null) outputString += "<font size=\"+1\"><br/>Workout totals: </font><br/>" + 
+                                                    "Lunges: " + maxLunge + "<br/>"+
+                                                    "Pushups: " + maxPushup + "<br/>"+
+                                                    "Situps: " + maxSitup + "<br/>" +
+                                                    "Squats: " + maxSquat + "<br/>" +
+                                                    "Burpees: " + maxBurpees + "<br/>";
             if (deck1.head == null && deck2.head != null) {
-                outputString += "<font size=\"+1\"></br>Deck1 Workout totals: </font><br/>" + 
-                                "Lunges: " + maxLunge + "<br/>"+
-                                "Pushups: " + maxPushup + "<br/>"+
-                                "Situps: " + maxSitup + "<br/>" +
-                                "Squats: " + maxSquat + "<br/>" +
-                                "Burpees: " + maxBurpees + "<br/>"+
-                                "<br/><font size=\"+2\">Deck 2!</font><br/>";
+                outputString += "<br/><font size=\"+2\">Deck 2!</font><br/>";
                 while (deck2.head != null) {
                     deck1.push(deck2.pop());
                 }
                 shuffle(deck1);
             } else if (deck1.head == null && deck3.head != null) {
-                outputString += "<font size=\"+1\"><br/>Deck 2 Workout totals: </font><br/>" + 
-                                "Lunges: " + maxLunge + "<br/>"+
-                                "Pushups: " + maxPushup + "<br/>"+
-                                "Situps: " + maxSitup + "<br/>" +
-                                "Squats: " + maxSquat + "<br/>" +
-                                "Burpees: " + maxBurpees + "<br/>"+
-                                "<br/><font size=\"+2\">Deck 3!</font><br/>";
+                outputString += "<br/><font size=\"+2\">Deck 3!</font><br/>";
                 while (deck3.head != null) {
                     deck1.push(deck3.pop());
                 }
