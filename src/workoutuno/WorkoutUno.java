@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  */
 public class WorkoutUno {
 
-    static int exerciseTotal, totalSkipped, maxSquat, maxPushup, maxSitup, maxLunge, maxBurpees = 0;
+    static int exerciseTotal, totalLunge,totalPushup,totalSitup,totalSquat,totalBurpees,totalSkipped, maxSquat, maxPushup, maxSitup, maxLunge, maxBurpees = 0;
 
     /**
      * @param args the command line arguments
@@ -243,8 +243,11 @@ public class WorkoutUno {
                         break;
                 }
                 switch (hand.getHand()[i].getType()) {
+                    case Reverse:
+                        type[color] = 0;                 //ill tweak this up to push car to stack
+                        break;
                     case Zero:
-                        breakTime += 1;
+                        breakTime += 1;             //Time for breaks
                         type[color] += 0;            //add zero?
                         break;
                     case One:
@@ -275,7 +278,7 @@ public class WorkoutUno {
                         type[color] += 9;
                         break;
                     case Skip:
-                        skipNumber = type[color];        //count how many there r to skip
+                        skipNumber += type[color];        //count how many there r to skip
                         type[color] = 0;                 //nark all of this workout
                         break;
                     case Draw2:
@@ -292,9 +295,7 @@ public class WorkoutUno {
                         type[3] *= 4;
                     }
                     break;
-                    case Reverse:
-                        type[color] = 0;                 //ill tweak this up to push car to stack
-                        break;
+                    
                 }
             }
         }
@@ -305,11 +306,17 @@ public class WorkoutUno {
                 + "<br />Burpees:       " + type[4]
                 + "<br />Break Time:    " + breakTime;
         exerciseTotal += type[0] + type[1] + type[2] + type[3] + type[4];
-        maxLunge += type[0];
-        maxPushup += type[1];
-        maxSitup += type[2];
-        maxSquat += type[3];
-        maxBurpees += type[4];
+        totalSkipped += skipNumber;
+        
+        totalLunge = type[0];
+        if (maxLunge <type[0])
+            maxLunge = type[0];
+        totalPushup = type[1];
+        if (maxPushup <type[1])
+            maxPushup = type[1];
+        maxSitup = type[2];
+        maxSquat = type[3];
+        maxBurpees = type[4];
 
         return result;
     }
