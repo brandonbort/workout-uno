@@ -249,8 +249,11 @@ public class WorkoutUno {
                         break;
                 }
                 switch (hand.getHand()[i].getType()) {
+                    case Reverse:
+                        type[color] = 0;                 //ill tweak this up to push car to stack
+                        break;
                     case Zero:
-                        breakTime += 1;
+                        breakTime += 1;             //Time for breaks
                         type[color] += 0;            //add zero?
                         break;
                     case One:
@@ -298,9 +301,7 @@ public class WorkoutUno {
                         type[3] *= 4;
                     }
                     break;
-                    case Reverse:
-                        type[color] = 0;                 //ill tweak this up to push car to stack
-                        break;
+                    
                 }
             }
         }
