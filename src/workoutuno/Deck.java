@@ -10,6 +10,11 @@ package workoutuno;
 // TODO: change comments and variable names
 // TODO: change data to reflect card variables
 
+/**
+ *
+ * @author brand
+ */
+
 public class Deck { 
 
     Node head; // head of list
@@ -47,7 +52,10 @@ public class Deck {
     
     }
     
-    
+    /**
+     *
+     * @return
+     */
     public Card pop() 
     { 
         // If linked list is empty 
@@ -66,6 +74,10 @@ public class Deck {
         return temp.card;
     } 
     
+    /**
+     *
+     * @param card
+     */
     public void push(Card card) 
     { 
         // Create a new node with given data 
@@ -95,6 +107,11 @@ public class Deck {
         setCardCount(1);
     } 
     //BRBORT- added function specifically for combining multiple decks together
+
+    /**
+     *
+     * @param new_deck
+     */
     public void pushDeck(Deck new_deck){
             Node last = head; 
             while (last.next != null) { 
@@ -107,6 +124,10 @@ public class Deck {
             setCardCount(new_deck.getCardCount());
     }
     
+    /**
+     *
+     * @param card
+     */
     public void setCardCount(int card){
         if(card < 0){
             if(getCardCount()>0) this.cardCount-=1;
@@ -116,6 +137,10 @@ public class Deck {
         }
     }
     
+    /**
+     *
+     * @return
+     */
     public int getCardCount(){
         return this.cardCount;
     }
