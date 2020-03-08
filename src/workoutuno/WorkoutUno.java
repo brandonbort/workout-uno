@@ -68,100 +68,6 @@ public class WorkoutUno {
         String outputString = new String();
         Hand hand = new Hand();
         //drawHand works, just need shuffle function to work
-        drawHand(hand, deck1);
-        System.out.print("Hand : ");
-        for(int i = 0; i < hand.getHandSize(); i++){
-            if(i != hand.getHandSize()-1) System.out.print(hand.getHand()[i] + ", ");
-            else System.out.print(hand.getHand()[i] + "\n");
-        }
-        int y=0,skipNumber=0,breakTime=0;   //color workout& skip counter& 0 break time
-        int z[]={0,0,0,0,0};                //set all workouts to 0
-        
-        for(int i = 0; i < hand.getHandSize(); i++){
-                    switch (hand.getHand()[i].getColor()) {
-                    case Green:
-                        y=0;
-                        break;
-                    case Blue:
-                        y=1;
-                        break;
-                    case Red:
-                        y=2;
-                        break;
-                    case Yellow:
-                        y=3;
-                        break;
-                    case Black:
-                        y=4;
-                        break;
-                    }
-                    switch (hand.getHand()[i].getType()) {
-                    case Zero:
-                        breakTime+=1;
-                        z[y]+=0;            //add zero?
-                        break;
-                    case One:
-                        z[y]+=1;
-                        break;
-                    case Two:
-                        z[y]+=2;
-                        break;
-                    case Three:
-                        z[y]+=3;
-                        break;
-                    case Four:
-                        z[y]+=4;
-                        break;
-                    case Five:
-                        z[y]+=5;
-                        break;
-                    case Six:
-                        z[y]+=6;
-                        break;
-                    case Seven:
-                        z[y]+=7;
-                        break;
-                    case Eight:
-                        z[y]+=8;
-                        break;
-                    case Nine:
-                        z[y]+=9;
-                        break;
-                    case Skip:
-                        skipNumber=z[y];        //count how many there r to skip
-                        z[y]=0;                 //nark all of this workout
-                        break;
-                    case Draw2:
-                        z[y]*=2;                //buff all of this workout
-                        break;
-                    case Wild:
-                        z[y]+=10;               //add burpees to this hoe
-                        break;
-                    case Wild4:
-                    {
-                     z[y]+=10;
-                     z[0]*=4;                   //multiply all workouts by 4
-                     z[1]*=4;
-                     z[2]*=4;
-                     z[3]*=4;
-                    }
-                        break;
-                    case Reverse:
-                        z[y]=0;                 //ill tweak this up to push car to stack
-                        break;       
-                }
-        }
-        
-        System.out.println("\nLunges:        " +z[0]);
-        System.out.println("Push-Ups:      " +z[1]);
-        System.out.println("Sit-Ups:       " +z[2]);
-        System.out.println("Squats:        " +z[3]);
-        System.out.println("Burpees:       " +z[4]);
-        System.out.println("Break Time:    " +breakTime);
-        
-        
-         //comment this out bec its annoying for now
-        System.out.println("\n Number of cards remaining in deck: " +deck1.getCardCount());
         shuffle(deck1);
 
         while(deck1.head != null){
@@ -169,8 +75,17 @@ public class WorkoutUno {
             drawHand(hand, deck1);
             hand.sortHand();
 
-            outputString += stringifyHand(hand) + "<br/>Cards remaining in deck: " +
-                            deck1.getCardCount() + "<br/>";
+            outputString += "<br/>Sorted Hand: " + stringifyHand(hand) + "<br/>Cards remaining in deck: " +
+                            deck1.getCardCount() + getWorkout(hand, deck1) + "<br/>";
+            if(deck1.head == null && deck2.head != null){
+                outputString += "<br/> Deck 2!<br/>";
+                while(deck2.head != null) deck1.push(deck2.pop());
+                shuffle(deck1);
+            }else if(deck1.head == null && deck3.head != null){
+                outputString += "<br/> Deck 3!<br/>";
+                while(deck3.head != null) deck1.push(deck3.pop());
+                shuffle(deck1);
+            }
         }
         try {
             outputToHtml(outputString);
@@ -184,11 +99,24 @@ public class WorkoutUno {
     
     public static String stringifyHand(Hand hand){
         String handString = new String();
+        String colorCode = new String();
         for(int i = 0; i < hand.getHandSize(); i++){
+            if(hand.getHand()[i] != null){
+                if(hand.getHand()[i].getColor() == Card.Color.Green)
+                    colorCode = "<font color = \"green\">";
+                else if(hand.getHand()[i].getColor() == Card.Color.Red)
+                    colorCode = "<font color = \"red\">";
+                else if(hand.getHand()[i].getColor() == Card.Color.Blue)
+                    colorCode = "<font color = \"blue\">";
+                else if(hand.getHand()[i].getColor() == Card.Color.Yellow)
+                    colorCode = "<font color = \"yellow\">";
+                else if(hand.getHand()[i].getColor() == Card.Color.Black)
+                    colorCode = "<font color = \"black\">";
+            }
             if(i < hand.getHandSize()-1 && hand.getHand()[i+1] != null) 
-                handString += hand.getHand()[i] + ", ";
+                handString += colorCode + hand.getHand()[i].getType() + "</font>, ";
             else if(i == hand.getHandSize()-1 || hand.getHand()[i+1] == null) {
-                handString += hand.getHand()[i] + "\n";
+                handString += colorCode + hand.getHand()[i].getType() + "</font>";
                 break;
             }
         }
@@ -267,5 +195,95 @@ public class WorkoutUno {
             }
         }
         return deck;
+    }
+    
+    public static String getWorkout(Hand hand, Deck deck){
+        int y=0,skipNumber=0,breakTime=0;   //color workout& skip counter& 0 break time
+        int z[]={0,0,0,0,0};                //set all workouts to 0
+        String result = new String();
+        for(int i = 0; i < hand.getHandSize(); i++){
+            if(hand.getHand()[i] != null){
+                    switch (hand.getHand()[i].getColor()) {
+                    case Green:
+                        y=0;
+                        break;
+                    case Blue:
+                        y=1;
+                        break;
+                    case Red:
+                        y=2;
+                        break;
+                    case Yellow:
+                        y=3;
+                        break;
+                    case Black:
+                        y=4;
+                        break;
+                    }
+                    switch (hand.getHand()[i].getType()) {
+                    case Zero:
+                        breakTime+=1;
+                        z[y]+=0;            //add zero?
+                        break;
+                    case One:
+                        z[y]+=1;
+                        break;
+                    case Two:
+                        z[y]+=2;
+                        break;
+                    case Three:
+                        z[y]+=3;
+                        break;
+                    case Four:
+                        z[y]+=4;
+                        break;
+                    case Five:
+                        z[y]+=5;
+                        break;
+                    case Six:
+                        z[y]+=6;
+                        break;
+                    case Seven:
+                        z[y]+=7;
+                        break;
+                    case Eight:
+                        z[y]+=8;
+                        break;
+                    case Nine:
+                        z[y]+=9;
+                        break;
+                    case Skip:
+                        skipNumber=z[y];        //count how many there r to skip
+                        z[y]=0;                 //nark all of this workout
+                        break;
+                    case Draw2:
+                        z[y]*=2;                //buff all of this workout
+                        break;
+                    case Wild:
+                        z[y]+=10;               //add burpees to this hoe
+                        break;
+                    case Wild4:
+                    {
+                     z[y]+=10;
+                     z[0]*=4;                   //multiply all workouts by 4
+                     z[1]*=4;
+                     z[2]*=4;
+                     z[3]*=4;
+                    }
+                        break;
+                    case Reverse:
+                        z[y]=0;                 //ill tweak this up to push car to stack
+                        break;       
+                }
+            }
+        }
+        result +="<br />Lunges:        " +z[0]
+               +"<br />Push-Ups:      " +z[1]
+               +"<br />Sit-Ups:       " +z[2]
+               +"<br />Squats:        " +z[3]
+               +"<br />Burpees:       " +z[4]
+               +"<br />Break Time:    " +breakTime;
+        
+        return result;
     }
 }
