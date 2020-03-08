@@ -28,21 +28,41 @@ public class Card {
     private final Color color;      //card color and type arent dynamic so i locked them in
     private final Type type;
    
+    /**
+     *
+     * @param color
+     * @param type
+     */
     public Card(Color color, Type type)     
     {
         this.color=color;
         this.type=type;
     }
     ////////////////////////////////////////////Gets here, idk if i need setters for card class
+
+    /**
+     *
+     * @return
+     */
 public Color getColor()
 {
     return this.color;
 }
-public Type getType()
+
+    /**
+     *
+     * @return
+     */
+    public Type getType()
 {
     return this.type;
 }
-public String toString()        //use this to call and make it easier to see what ur card is
+
+    /**
+     *
+     * @return
+     */
+    public String toString()        //use this to call and make it easier to see what ur card is
 {
     return color+"_"+type;
 }
