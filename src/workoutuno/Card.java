@@ -1,6 +1,7 @@
 //Carlos Cuartas
 //FOR: CS 2365
 //Help from Code Clique and Brandon!
+//He did some minor touch ups to naming and bugs
 package workoutuno;
 /**
  * 
