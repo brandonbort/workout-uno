@@ -18,12 +18,33 @@ public class Deck {
     static class Node {
         Card card;
         Node next;
+        Node prev;
         
         Node(Card c)
         {
             card = c;
             next = null;
+            prev = null;
         }
+        
+        public Node getPrev() {
+            return this.prev;
+        }
+
+        public Node getNext() {
+            return this.next;
+        }
+        
+        public void setPrev(Node prevN) {
+            this.prev = prevN;
+        }
+        
+        public void setNext(Node nextN) {  
+            this.next = nextN;
+        }
+        
+        
+    
     }
     
     
@@ -32,11 +53,12 @@ public class Deck {
         // If linked list is empty 
         if (head == null) 
             return null; 
-  
+ 
+        head.setPrev(null);// prev pointer set to 
         // Store head node 
         Node temp = head; 
   
-        // If head needs to be removed 
+         // If head needs to be removed 
         head = temp.next;   // Change head 
         //removes one from the cardCount
         setCardCount(-1);
@@ -52,6 +74,7 @@ public class Deck {
         if (head == null)
         {
             new_node.next = null; 
+            new_node.prev = null;
             head = new_node;
         }
         else 
@@ -59,12 +82,15 @@ public class Deck {
             // Else traverse till the last node 
             // and insert the new_node there 
             Node last = head; 
+            Node temp = null; // going to be used for the prev pointer
             while (last.next != null) { 
+                temp = last; 
                 last = last.next; 
             } 
   
             // Insert the new_node at last node 
-            last.next = new_node; 
+            last.next = new_node;
+            last.prev = temp;
         }
         setCardCount(1);
     } 
@@ -82,8 +108,8 @@ public class Deck {
     }
     
     public void setCardCount(int card){
-        if(card < 0 && getCardCount() < 0){
-            System.out.println("Error: Cannot have negative cards in deck.");
+        if(card < 0){
+            if(getCardCount()>0) this.cardCount-=1;
         }
         else{
             this.cardCount += card;

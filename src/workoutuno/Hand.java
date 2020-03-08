@@ -35,45 +35,45 @@ public class Hand {
 //    }
     //will sort this.hand first by color, and then by face value
     public void sortHand(){
-        this.sortColor(0, new Hand(), 0);
         this.sortType(0, new Hand(), 0);
+        this.sortColor(0, new Hand(), 0);
     }
     //recursive function that will sort by color
     public void sortColor(int color, Hand newHand, int handIndex){
-        Card[] tempHand = getHand();
-        int i = 0;
-        while(tempHand[i] != null){
-            if(tempHand[i].getColor() == Card.Color.getColor(color)){
-                newHand.setHandIndex(handIndex, tempHand[i]);
-                handIndex++;
+            Card[] tempHand = getHand();
+            int i = 0;
+            while(i < newHand.getHandSize()){
+                if(tempHand[i] != null && tempHand[i].getColor() == Card.Color.getColor(color)){
+                    newHand.setHandIndex(handIndex, tempHand[i]);
+                    handIndex++;
+                }
+                i++;
             }
-            i++;
-        }
-        //sorts by the next color if there is another one
-        if(color < 4) sortColor(color++, newHand, handIndex);
-        else{
-            for(int x = 0; x < newHand.getHandSize(); x++){
-                this.setHandIndex(x, newHand.getHand()[x]);
+            //sorts by the next color if there is another one
+            if(color < 4) sortColor(color+1, newHand, handIndex);
+            else{
+                for(int x = 0; x < newHand.getHandSize(); x++){
+                    this.setHandIndex(x, newHand.getHand()[x]);
+                }
             }
-        }
     }
     //recursive for setting by type
     public void sortType(int type, Hand newHand, int index){
-        Card[] tempHand = getHand();
-        int i = 0;
-        while(tempHand[i] != null){
-            if(tempHand[i].getType() == Card.Type.getType(type)){
-                newHand.setHandIndex(index, tempHand[i]);
-                index++;
+            Card[] tempHand = getHand();
+            int i = 0;
+            while(i < newHand.getHandSize()){
+                if(tempHand[i] != null && (tempHand[i].getType() == Card.Type.getType(type))){
+                    newHand.setHandIndex(index, tempHand[i]);
+                    index++;
+                }
+                i++;
             }
-            i++;
-        }
-        
-        if(type <= 14) sortType(type++, newHand, index);
-        else{
-            for(int x = 0; x < newHand.getHandSize(); x++){
-                this.setHandIndex(x, newHand.getHand()[x]);
+
+            if(type < 14) sortType(type+1, newHand, index);
+            else{
+                for(int x = 0; x < newHand.getHandSize(); x++){
+                    this.setHandIndex(x, newHand.getHand()[x]);
+                }
             }
-        }
     }        
 }
