@@ -220,7 +220,7 @@ public class WorkoutUno {
     }
 
     public static String getWorkout(Hand hand, Deck deck) {
-        int color = 0, skipNumber = 0, breakTime = 0;   //color workout& skip counter& 0 break time
+        int color = 0, breakTime = 0;   //color workout& skip counter& 0 break time
         int type[] = {0, 0, 0, 0, 0};                //set all workouts to 0
         String result = new String();
         for (int i = 0; i < hand.getHandSize(); i++) {
@@ -306,7 +306,6 @@ public class WorkoutUno {
                 + "<br />Burpees:       " + type[4]
                 + "<br />Break Time:    " + breakTime;
         exerciseTotal += type[0] + type[1] + type[2] + type[3] + type[4];
-       
         
         totalLunge += type[0];
         if (maxLunge <type[0])
