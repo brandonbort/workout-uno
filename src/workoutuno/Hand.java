@@ -1,7 +1,7 @@
 
 //Airi Shimamura
-/*
- * To change this license header, choose License Headers in Project Properties.
+/*FOR: CS 2365S
+ * COLLABORATOR: Brandon Bort
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -16,23 +16,37 @@ public class Hand {
     private final Card[] hand;
     
     //constructor
+
+    /**
+     *Set up the maximum size of the hand size
+     */
     public Hand(){
         this.HandSize = 7;
         this.hand = new Card[7];
     }
     //getter
+
+    /**
+     *To get values of hand size
+     * @return: the size of the hand
+     */
     public int getHandSize (){
         return HandSize;
     }   
     
+    /**
+     *To get the values of the card data 
+     * @return: the card data in hand 
+     */
     public Card[] getHand(){
         return hand;
     }
-    //getter
-    public int getHandSize(){
-        return HandSize;
-    }   
     
+    /**
+     *To set up the hand index 
+     * @param index:index of array for hand 
+     * @param card: card data(color & face value)
+     */
     public void setHandIndex(int index, Card card){
         this.hand[index] = card;
     }
@@ -40,11 +54,22 @@ public class Hand {
 //        this.hand = newHand;
 //    }
     //will sort this.hand first by color, and then by face value
+
+    /**
+     *To change the order of hand cards
+     */
     public void sortHand(){
         this.sortType(0, new Hand(), 0);
         this.sortColor(0, new Hand(), 0);
     }
     //recursive function that will sort by color
+
+    /**
+     *To change the color order if cards 
+     * @param color: card color 
+     * @param newHand:  new hand object 
+     * @param handIndex: index of array for hand
+     */
     public void sortColor(int color, Hand newHand, int handIndex){
             Card[] tempHand = getHand();
             int i = 0;
@@ -64,6 +89,13 @@ public class Hand {
             }
     }
     //recursive for setting by type
+
+    /**
+     *TO change order of cards by face value 
+     * @param type: face value
+     * @param newHand: new hand object 
+     * @param index: index of the hand array 
+     */
     public void sortType(int type, Hand newHand, int index){
             Card[] tempHand = getHand();
             int i = 0;
