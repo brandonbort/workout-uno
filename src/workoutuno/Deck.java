@@ -108,8 +108,8 @@ public class Deck {
     }
     
     public void setCardCount(int card){
-        if(card < 0 && getCardCount() < 0){
-            System.out.println("Error: Cannot have negative cards in deck.");
+        if(card < 0){
+            if(getCardCount()>0) this.cardCount-=1;
         }
         else{
             this.cardCount += card;
