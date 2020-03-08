@@ -5,8 +5,11 @@
  */
 package workoutuno;
 
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import static java.lang.System.exit;
-import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -47,66 +50,86 @@ public class WorkoutUno {
                 deck1.pushDeck(addToDeck(new Deck(), options[2]));
             }
         }
-
+        String outputString = new String();
         Hand hand = new Hand();
-        //drawHand works, just need shuffle function to work
-        shuffle(deck1, options[2]);
-        drawHand(hand, deck1);
-        
-        System.out.print("Hand : ");
-        for(int i = 0; i < hand.getHandSize(); i++){
-//            if(hand.getHand()[i] == null) System.out.println("no card");
-            if(i != hand.getHandSize()-1) System.out.print(hand.getHand()[i] + ", ");
-            else System.out.print(hand.getHand()[i] + "\n");
-        }
-        System.out.println("Number of cards remaining in deck: " +deck1.getCardCount());
+        shuffle(deck1);
+
         while(deck1.head != null){
-            System.out.println(deck1.pop());
+           
+            drawHand(hand, deck1);
+            hand.sortHand();
+
+            for(int x = 0; x < hand.getHandSize(); x++){
+                System.out.println( hand.getHand()[x]);
+            }
+            outputString += stringifyHand(hand) + "<br/>Cards remaining in deck: " +
+                            deck1.getCardCount() + "<br/>";
         }
+        try {
+            outputToHtml(outputString);
+        } catch (FileNotFoundException ex) {
+            System.out.println("Could not find output file.");
+        }
+        
+//        System.out.println("Number of cards remaining in deck: " +deck1.getCardCount());
+//        while(deck1.head != null){
+//            System.out.println(deck1.pop());
+//        }
         exit(0);
             
     }
     
-    public static void shuffle(Deck deck, int inclAct){
-      
-        Deck.Node temp = deck.head;                     //pull from deck class
-        int max, min, range;
-        min = 1;
-        if(inclAct == 0) max = 108;
-        else max = 76;
-        
-        range = max - min +1;
-        
-        for(int i = 0; i < max*2; i++){
-            int randomX = (int) (Math.random() * range)+ min;   //randomize the deck
-//            System.out.println(randomX);
-            while(randomX --> 0 && temp.next != null)  {     //step through until random is empty
-                temp = temp.next;
+    public static String stringifyHand(Hand hand){
+        String handString = new String();
+        for(int i = 0; i < hand.getHandSize(); i++){
+            if(i < hand.getHandSize()-1 && hand.getHand()[i+1] != null) 
+                handString += hand.getHand()[i] + ", ";
+            else if(i == hand.getHandSize()-1 || hand.getHand()[i+1] == null) {
+                handString += hand.getHand()[i] + "\n";
+                break;
             }
-            if(temp.getPrev() != null)  
-                temp.getPrev().setNext(temp.getNext());
-            if(temp.getNext() != null)                      //if getnext is not pointing to null 
-                temp.getNext().setPrev(temp.getPrev());     //switch places of prev and next
-
-//            temp.setPrev(null);
-            temp.setNext(deck.head);                             //set new next as head
-            temp.setPrev(null);                             //set new prev as null
-            deck.head.setPrev(temp);
-            
-            deck.head = temp;                                    //put 
+        }
+        return handString;
+    }
+    
+    public static void shuffle(Deck deck){
+        Card[] map = new Card[deck.getCardCount()];
+        int cardCount = deck.getCardCount();
+        for(int i = 0; i < cardCount; i++){
+            map[i] = deck.pop(); //adds all cards from the deck to temporary array
+        }
+        
+        for(int i = 0; i < cardCount; i++){
+            int randomX = (int)(Math.random() * cardCount);
+            Card temp = map[randomX];
+            map[randomX] = map[i];
+            map[i] = temp;
+        }
+     
+        for(int i = 0; i < cardCount; i++){
+            deck.push(map[i]);
         }
     }
     //BRBORT- this will accept a hand and output it to our chosen html file
-    public static void outputToHtml(Hand hand){
-        
+    public static void outputToHtml(String output) throws FileNotFoundException{
+        PrintStream outputStream = new PrintStream("output.html");
+        outputStream.println(output);
+        outputStream.close();
     }
     //BRBORT- created drawHand function
     //This function will pop the card off the top of the passed deck and add it 
     //to the hand until the hand has a full 7 cards
     //-functionality written by airishimamura
     public static void drawHand(Hand hand, Deck deck){
-        for (int i = 0; i < hand.getHandSize(); i++){
-            if(deck.head != null){
+        int incrementor;
+        //clears the previous hand since the same hand will be used everytime
+        for(int i = 0; i < hand.getHandSize(); i++){
+            hand.setHandIndex(i, null);
+        }
+        if(deck.getCardCount() < 7)incrementor = deck.getCardCount();
+        else incrementor = hand.getHandSize();
+        for (int i = 0; i < incrementor; i++){
+            if(deck.head.card != null){
                 hand.setHandIndex(i, deck.pop());
             }
         }
