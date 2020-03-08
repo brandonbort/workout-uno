@@ -1,6 +1,6 @@
 //Carlos Cuartas
 //FOR: CS 2365
-//Help from Code Clique
+//Help from Code Clique and Brandon!
 package workoutuno;
 /**
  * 
@@ -30,7 +30,7 @@ public class Card {
     private final Type type;
    
     /**
-     *
+     *Color of Card
      * @param color
      * @param type
      */
@@ -42,8 +42,8 @@ public class Card {
     ////////////////////////////////////////////Gets here, idk if i need setters for card class
 
     /**
-     *
-     * @return
+     *getter
+     * @return color of card
      */
 public Color getColor()
 {
@@ -51,8 +51,8 @@ public Color getColor()
 }
 
     /**
-     *
-     * @return
+     *getter
+     * @return type and number
      */
     public Type getType()
 {
@@ -61,7 +61,7 @@ public Color getColor()
 
     /**
      *
-     * @return
+     * @return string statement to clarify
      */
     public String toString()        //use this to call and make it easier to see what ur card is
 {
