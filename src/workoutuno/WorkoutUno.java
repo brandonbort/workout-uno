@@ -320,9 +320,15 @@ public class WorkoutUno {
         totalPushup = type[1];
         if (maxPushup <type[1])
             maxPushup = type[1];
-        maxSitup = type[2];
-        maxSquat = type[3];
-        maxBurpees = type[4];
+        totalSitup = type[2];
+        if (maxSitup <type[2])
+            maxSitup = type[2];
+        totalSquat = type[3];
+        if (maxSquat <type[3])
+            maxSquat = type[3];
+         totalBurpees = type[4];
+        if (maxBurpees <type[4])
+            maxBurpees = type[4];
 
         return result;
     }
