@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 public class WorkoutUno {
 
     static int exerciseTotal, totalLunge,totalPushup,totalSitup,totalSquat,totalBurpees,totalSkipped, maxSquat, maxPushup, maxSitup, maxLunge, maxBurpees = 0;
-
+//a whole lotta max and total stuff-carlos
     /**
      * @param args the command line arguments
      */
@@ -224,7 +224,7 @@ public class WorkoutUno {
         int type[] = {0, 0, 0, 0, 0};                //set all workouts to 0
         String result = new String();
         for (int i = 0; i < hand.getHandSize(); i++) {
-            if (hand.getHand()[i] != null) {
+            if (hand.getHand()[i] != null) {//if u have quetions on how this works ask me- carlos
                 switch (hand.getHand()[i].getColor()) {
                     case Green:
                         color = 0;
@@ -244,6 +244,9 @@ public class WorkoutUno {
                 }
                 switch (hand.getHand()[i].getType()) {
                     case Reverse:
+                        //deck.push((hand.getHand()[i]));
+                        //hand.setHandIndex(i,null);
+                        
                         type[color] = 0;                 //ill tweak this up to push car to stack
                         break;
                     case Zero:
@@ -305,8 +308,9 @@ public class WorkoutUno {
                 + "<br />Squats:        " + type[3]
                 + "<br />Burpees:       " + type[4]
                 + "<br />Break Time:    " + breakTime;
+        breakTime=0;
         exerciseTotal += type[0] + type[1] + type[2] + type[3] + type[4];
-        
+        //i didnt know if you wanted max or total -carlos
         totalLunge += type[0];
         if (maxLunge <type[0])
             maxLunge = type[0];
