@@ -16,12 +16,14 @@ import java.util.logging.Logger;
  * @author brand
  */
 public class WorkoutUno {
-
+        
+    static int exerciseTotal, totalSkipped, maxSquat, maxPushup, maxSitup, maxLunge, maxBurpees = 0;
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args){
         // TODO code application logic here
+       
        UserInterface ui = new UserInterface();
        int[] options = new int[3];
        Object lock = new Object(); //lock object will pause thread until user enters input in GUI
@@ -40,11 +42,24 @@ public class WorkoutUno {
        //options[1] will return a 1 if the user selected to shuffle the decks together
        //options[2] will return a 0 if the user selected to include action cards,
        //or a 1 if they chose not to
-        
+       
         Deck deck1 = new Deck();
+        Deck deck2 = new Deck();
+        Deck deck3 = new Deck();
         deck1 = addToDeck(deck1, options[2]);
+       
+        //when the deck options is 2 or 3, add one or two decks
+        if(options[0] > 1) {
+           deck2 = addToDeck(deck2, options[2]);
+           
+           if(options[0] == 3){
+              deck3 = addToDeck(deck3, options[2]);
+           }
+       } 
+        
         //based on if the user selected to shuffle decks together, takes number
         //of decks and adds an equal number into one giant deck
+        
         if(options[1] == 1){
             for(int i = 1; i < options[0]; i++){
                 deck1.pushDeck(addToDeck(new Deck(), options[2]));
@@ -52,6 +67,101 @@ public class WorkoutUno {
         }
         String outputString = new String();
         Hand hand = new Hand();
+        //drawHand works, just need shuffle function to work
+        drawHand(hand, deck1);
+        System.out.print("Hand : ");
+        for(int i = 0; i < hand.getHandSize(); i++){
+            if(i != hand.getHandSize()-1) System.out.print(hand.getHand()[i] + ", ");
+            else System.out.print(hand.getHand()[i] + "\n");
+        }
+        int y=0,skipNumber=0,breakTime=0;   //color workout& skip counter& 0 break time
+        int z[]={0,0,0,0,0};                //set all workouts to 0
+        
+        for(int i = 0; i < hand.getHandSize(); i++){
+                    switch (hand.getHand()[i].getColor()) {
+                    case Green:
+                        y=0;
+                        break;
+                    case Blue:
+                        y=1;
+                        break;
+                    case Red:
+                        y=2;
+                        break;
+                    case Yellow:
+                        y=3;
+                        break;
+                    case Black:
+                        y=4;
+                        break;
+                    }
+                    switch (hand.getHand()[i].getType()) {
+                    case Zero:
+                        breakTime+=1;
+                        z[y]+=0;            //add zero?
+                        break;
+                    case One:
+                        z[y]+=1;
+                        break;
+                    case Two:
+                        z[y]+=2;
+                        break;
+                    case Three:
+                        z[y]+=3;
+                        break;
+                    case Four:
+                        z[y]+=4;
+                        break;
+                    case Five:
+                        z[y]+=5;
+                        break;
+                    case Six:
+                        z[y]+=6;
+                        break;
+                    case Seven:
+                        z[y]+=7;
+                        break;
+                    case Eight:
+                        z[y]+=8;
+                        break;
+                    case Nine:
+                        z[y]+=9;
+                        break;
+                    case Skip:
+                        skipNumber=z[y];        //count how many there r to skip
+                        z[y]=0;                 //nark all of this workout
+                        break;
+                    case Draw2:
+                        z[y]*=2;                //buff all of this workout
+                        break;
+                    case Wild:
+                        z[y]+=10;               //add burpees to this hoe
+                        break;
+                    case Wild4:
+                    {
+                     z[y]+=10;
+                     z[0]*=4;                   //multiply all workouts by 4
+                     z[1]*=4;
+                     z[2]*=4;
+                     z[3]*=4;
+                    }
+                        break;
+                    case Reverse:
+                        z[y]=0;                 //ill tweak this up to push car to stack
+                        break;       
+                }
+        }
+        
+        System.out.println("\nLunges:        " +z[0]);
+        System.out.println("Push-Ups:      " +z[1]);
+        System.out.println("Sit-Ups:       " +z[2]);
+        System.out.println("Squats:        " +z[3]);
+        System.out.println("Burpees:       " +z[4]);
+        System.out.println("Break Time:    " +breakTime);
+        
+        
+         //comment this out bec its annoying for now
+        System.out.println("\n Number of cards remaining in deck: " +deck1.getCardCount());
         shuffle(deck1);
 
         while(deck1.head != null){
