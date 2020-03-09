@@ -87,7 +87,7 @@ Actual: type
 
     /**
      *
-     * @return string statement to clarify
+     * @return string representation of hand
      */
     /*
 TEST CASE

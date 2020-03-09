@@ -1,7 +1,9 @@
 /*
  * AUTHOR: Brandon Bort
  * FOR: CS 2365
- * To change this template file, choose Tools | Templates
+ * DESCRIPTION: Creates our custom UI for WorkoutUno, populates an int array
+ * with selected User Interface options. There are no editable fields in the UI
+ * so users are limited to the fields available
  */
 
 package workoutuno;
@@ -12,10 +14,13 @@ import java.awt.event.*;
 import javax.swing.*;
 /**
  *
- * Author: BRANDON BORT
+ * @author: BRANDON BORT
  */
 class UserInterface extends JFrame{
-    
+    /**
+     * @param options the array the user's input will be inserted into
+     * @param lock the object to pause the main thread until the user selects the okay button
+     */
     public void getOptions(int[] options, Object lock){
 
         UserInterface parFrame = new UserInterface();
@@ -58,6 +63,7 @@ class UserInterface extends JFrame{
         //sets the Okay button to get the results from the UI
 
         okayBtn.addActionListener(new ActionListener(){
+            @Override
             public void actionPerformed(ActionEvent e)
             {
               if(e.getSource() == okayBtn)  {

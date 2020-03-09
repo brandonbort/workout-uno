@@ -1,7 +1,9 @@
 /*
  * AUTHOR: Brandon Bort
- * FOR: CS 2365
- * To change this template file, choose Tools | Templates
+ * FOR: CS 2365 Project 2
+ * COLLABORATORS: Brittney Taylor, Aaron Sloan, Airi Shimimura, Carlos Cuartas
+ * Contributions: Individual contributions are annotated in comments above each function,
+ * everything else is written by Brandon Bort
  */
 package workoutuno;
 
@@ -17,6 +19,7 @@ public class WorkoutUno {
 
     static int exerciseTotal, totalLunge,totalPushup,totalSitup,totalSquat,totalBurpees, maxSquat, maxPushup, maxSitup, maxLunge, maxBurpees = 0;
     static int squatSkipped, pushupSkipped, situpSkipped, lungeSkipped = 0;//added on another line to not have a huge line
+    //Contribution by Aaron Sloan for integration of Deck class
     /**
      * User Interface which prompts the user to select number of decks,
      * wild cards or not, and whether to shuffle the decks as well.
@@ -26,7 +29,6 @@ public class WorkoutUno {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-
         UserInterface ui = new UserInterface();
         int[] options = new int[3];
         Object lock = new Object(); //lock object will pause thread until user enters input in GUI
@@ -89,7 +91,13 @@ public class WorkoutUno {
                                                     "Lunges skipped: " + lungeSkipped + "<br/>" +
                                                     "Pushups skipped: " + pushupSkipped + "<br/>" +
                                                     "Situps skipped: " + situpSkipped + "<br/>" +
-                                                    "Squats skipped: " + squatSkipped;
+                                                    "Squats skipped: " + squatSkipped + "<br/>" +
+                                                    "<br/> Most # of exercises in a single hand: </br>" +
+                                                    "Lunges: " + maxLunge + "<br/>" +
+                                                    "Pushups: " + maxPushup + "<br/>" +
+                                                    "Situps: " + maxSitup + "<br/>" +
+                                                    "Squats: " + maxSquat + "<br/>" +
+                                                    "Burpees: " + maxBurpees;
             if (deck1.head == null && deck2.head != null) {
                 outputString += "<br/><font size=\"+2\">Deck 2!</font><br/>";
                 while (deck2.head != null) {
