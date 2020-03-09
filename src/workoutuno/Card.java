@@ -7,6 +7,13 @@ package workoutuno;
  * 
  * @author lolc4
  */
+
+/*
+TEST CASE
+Input: None
+Expected: Card&String
+Actual: Card&String
+*/
 public class Card {
     enum Color      //creates final variables for colors, like an array
     {
@@ -35,6 +42,12 @@ public class Card {
      * @param color
      * @param type
      */
+    /*
+TEST CASE
+Input: color&type
+Expected: Card&String
+Actual: Card&String
+*/
     public Card(Color color, Type type)     
     {
         this.color=color;
@@ -46,6 +59,12 @@ public class Card {
      *getter
      * @return color of card
      */
+    /*
+TEST CASE
+Input: None
+Expected: color
+Actual: color
+*/
 public Color getColor()
 {
     return this.color;
@@ -55,6 +74,12 @@ public Color getColor()
      *getter
      * @return type and number
      */
+/*
+TEST CASE
+Input: None
+Expected: type  
+Actual: type
+*/
     public Type getType()
 {
     return this.type;
@@ -64,6 +89,12 @@ public Color getColor()
      *
      * @return string statement to clarify
      */
+    /*
+TEST CASE
+Input: None
+Expected: String with color&type
+Actual: String with color&type
+*/
     public String toString()        //use this to call and make it easier to see what ur card is
 {
     return color+"_"+type;
