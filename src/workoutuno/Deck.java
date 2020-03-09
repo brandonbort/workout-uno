@@ -162,10 +162,8 @@ public class Deck {
         head.setPrev(null);
         // Store head node 
         Node temp = head; 
-  
         // Since head needs to be removed 
         head = temp.next;   // Change head 
-        
         //removes one from the cardCount
         setCardCount(-1);
         
@@ -208,7 +206,6 @@ public class Deck {
                 // last steps over to next node
                 last = last.next; 
             } 
-  
             // new node (card) inserted after last node
             last.next = new_node;
             // set previous pointer of new node to point to temp
@@ -233,7 +230,6 @@ public class Deck {
                 // last steps over to next node
                 last = last.next; 
             } 
-            
             // Insert the new_deck at last node 
             last.next = new_deck.head;
             last = last.next; // last points to head of new deck
