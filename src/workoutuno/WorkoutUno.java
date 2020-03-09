@@ -1,7 +1,7 @@
 /*
  * AUTHOR: Brandon Bort
- * FOR: CS 2365
- * To change this template file, choose Tools | Templates
+ * FOR: CS 2365 Project 2
+ * COLLABORATORS: 
  */
 package workoutuno;
 
@@ -85,7 +85,13 @@ public class WorkoutUno {
                                                     "Lunges skipped: " + lungeSkipped + "<br/>" +
                                                     "Pushups skipped: " + pushupSkipped + "<br/>" +
                                                     "Situps skipped: " + situpSkipped + "<br/>" +
-                                                    "Squats skipped: " + squatSkipped;
+                                                    "Squats skipped: " + squatSkipped + "<br/>" +
+                                                    "<br/> Most # of exercises in a single hand: </br>" +
+                                                    "Lunges: " + maxLunge + "<br/>" +
+                                                    "Pushups: " + maxPushup + "<br/>" +
+                                                    "Situps: " + maxSitup + "<br/>" +
+                                                    "Squats: " + maxSquat + "<br/>" +
+                                                    "Burpees: " + maxBurpees;
             if (deck1.head == null && deck2.head != null) {
                 outputString += "<br/><font size=\"+2\">Deck 2!</font><br/>";
                 while (deck2.head != null) {
@@ -110,6 +116,11 @@ public class WorkoutUno {
 
     }
 
+    /**
+     *
+     * @param hand
+     * @return
+     */
     public static String stringifyHand(Hand hand) {
         String handString = new String();
         String colorCode = new String();
@@ -137,6 +148,10 @@ public class WorkoutUno {
         return handString;
     }
 
+    /**
+     *
+     * @param deck
+     */
     public static void shuffle(Deck deck) {
         Card[] map = new Card[deck.getCardCount()];
         int cardCount = deck.getCardCount();
@@ -157,6 +172,12 @@ public class WorkoutUno {
     }
 
     //BRBORT- this will accept a hand and output it to our chosen html file
+
+    /**
+     *
+     * @param output
+     * @throws FileNotFoundException
+     */
     public static void outputToHtml(String output) throws FileNotFoundException {
         PrintStream outputStream = new PrintStream("output.html");
         outputStream.println(output);
@@ -167,6 +188,12 @@ public class WorkoutUno {
     //This function will pop the card off the top of the passed deck and add it 
     //to the hand until the hand has a full 7 cards
     //-functionality written by airishimamura
+
+    /**
+     *
+     * @param hand
+     * @param deck
+     */
     public static void drawHand(Hand hand, Deck deck) {
         int incrementor;
         //clears the previous hand since the same hand will be used everytime
@@ -189,6 +216,13 @@ public class WorkoutUno {
     //Accepts a deck and the user's choice whether to include action cards or not
     //and populates the deck with cards based on that choice
     //if inclAct == 0, it will include action cards
+
+    /**
+     *
+     * @param deck
+     * @param inclAct
+     * @return
+     */
     public static Deck addToDeck(Deck deck, int inclAct) {
         int maxSize;
 
@@ -222,6 +256,12 @@ public class WorkoutUno {
         return deck;
     }
 
+    /**
+     *
+     * @param hand
+     * @param deck
+     * @return
+     */
     public static String getWorkout(Hand hand, Deck deck) {
         int color = 0;  //color workout& skip counter& 0 break time
         int type[] = {0, 0, 0, 0, 0};                //set all workouts to 0
