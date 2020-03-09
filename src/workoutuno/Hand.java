@@ -2,8 +2,9 @@
 //Airi Shimamura
 /*FOR: CS 2365S
  * COLLABORATOR: Brandon Bort
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * CONTRIBUTION: constructor, sorting methods for color and type
+ * Description: Hand class created as an array instantiation of Cards with unique
+ * functions pertaining to necessary code execution
  */
 package workoutuno;
 
