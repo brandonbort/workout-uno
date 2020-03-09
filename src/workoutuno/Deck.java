@@ -1,4 +1,4 @@
-/**
+/*
  * AUTHOR: Aaron Sloan
  * FOR: CS 2365
  * COLLABORATOR: Brandon Bort
