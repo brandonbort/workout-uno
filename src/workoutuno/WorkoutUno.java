@@ -8,8 +8,6 @@ package workoutuno;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import static java.lang.System.exit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -17,8 +15,8 @@ import java.util.logging.Logger;
  */
 public class WorkoutUno {
 
-    static int exerciseTotal, totalLunge,totalPushup,totalSitup,totalSquat,totalBurpees,totalSkipped, maxSquat, maxPushup, maxSitup, maxLunge, maxBurpees = 0;
-
+    static int exerciseTotal, totalLunge,totalPushup,totalSitup,totalSquat,totalBurpees, maxSquat, maxPushup, maxSitup, maxLunge, maxBurpees = 0;
+    static int squatSkipped, pushupSkipped, situpSkipped, lungeSkipped = 0;//added on another line to not have a huge line
     /**
      * @param args the command line arguments
      */
@@ -82,7 +80,12 @@ public class WorkoutUno {
                                                     "Pushups: " + totalPushup + "<br/>"+
                                                     "Situps: " + totalSitup + "<br/>" +
                                                     "Squats: " + totalSquat + "<br/>" +
-                                                    "Burpees: " + totalBurpees + "<br/>";
+                                                    "Burpees: " + totalBurpees + "<br/>" +
+                                                    "<br/> Skipped Exercises <br/>" +
+                                                    "Lunges skipped: " + lungeSkipped + "<br/>" +
+                                                    "Pushups skipped: " + pushupSkipped + "<br/>" +
+                                                    "Situps skipped: " + situpSkipped + "<br/>" +
+                                                    "Squats skipped: " + squatSkipped;
             if (deck1.head == null && deck2.head != null) {
                 outputString += "<br/><font size=\"+2\">Deck 2!</font><br/>";
                 while (deck2.head != null) {
@@ -220,9 +223,10 @@ public class WorkoutUno {
     }
 
     public static String getWorkout(Hand hand, Deck deck) {
-        int color = 0, skipNumber = 0, breakTime = 0;   //color workout& skip counter& 0 break time
+        int color = 0;  //color workout& skip counter& 0 break time
         int type[] = {0, 0, 0, 0, 0};                //set all workouts to 0
         boolean[] skipColors = new boolean[5];  //keeps track of colors that will have their workouts skipped
+        int[] colorBreaks  = new int[5];
         String result = new String();
         
         for(int i = 0; i < hand.getHandSize(); i++){
@@ -243,7 +247,7 @@ public class WorkoutUno {
                     switch (hand.getHand()[i].getType()) {
 
                         case Zero:
-                            breakTime += 1;             //Time for breaks
+                            colorBreaks[color] += 1;            //Time for breaks
                             break;
                         case One:
                             type[color] += 1;
@@ -273,8 +277,21 @@ public class WorkoutUno {
                             type[color] += 9;
                             break;
                         case Skip:
-                            skipNumber += type[color];        //count how many there are to skip
-                            type[color] = 0;                 //nark all of this workout
+                            switch(color){
+                                case 0:
+                                    lungeSkipped += type[color];
+                                    break;
+                                case 1:
+                                    situpSkipped += type[color];
+                                    break;
+                                case 2:
+                                    pushupSkipped += type[color];
+                                    break;
+                                case 3:
+                                    squatSkipped += type[color];
+                                    break;
+                            }//count how many there are to skip
+                            type[color] = 0;                 //since its sorted prior to this, will always work correctly
                             break;
                         case Draw2:
                             type[color] *= 2;                //buff all of this workout
@@ -295,15 +312,17 @@ public class WorkoutUno {
                 }
             }
         }
-        result += "<br />Lunges:        " + type[0]
-                + "<br />Push-Ups:      " + type[1]
-                + "<br />Sit-Ups:       " + type[2]
-                + "<br />Squats:        " + type[3]
-                + "<br />Burpees:       " + type[4]
-                + "<br />Break Time:    " + breakTime;
+        result += "<br />Lunges:        " + type[0];
+        if(colorBreaks[0] > 0) result += "<br/>Breaktime: " + colorBreaks[0] + " minutes.";
+        result += "<br />Push-Ups:      " + type[1];
+        if(colorBreaks[1] > 0) result += "<br/>Breaktime: " + colorBreaks[1] + " minutes.";
+        result += "<br />Sit-Ups:       " + type[2];
+        if(colorBreaks[0] > 0) result += "<br/>Breaktime: " + colorBreaks[0] + " minutes.";
+        result += "<br />Squats:        " + type[3]
+                + "<br />Burpees:       " + type[4];//burpees cant be skipped so no breaks
+
         exerciseTotal += type[0] + type[1] + type[2] + type[3] + type[4];
-        totalSkipped += skipNumber;
-        
+        //i didnt know if you wanted max or total -carlos
         totalLunge += type[0];
         if (maxLunge <type[0])
             maxLunge = type[0];
