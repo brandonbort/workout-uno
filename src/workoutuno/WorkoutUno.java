@@ -78,11 +78,11 @@ public class WorkoutUno {
             outputString += "<br/>Sorted Hand: " + stringifyHand(hand) + "<br/>Cards remaining in deck: "
                     + deck1.getCardCount() + getWorkout(hand, deck1) + "<br/>";
             if(deck1.head == null) outputString += "<font size=\"+1\"><br/>Workout totals: </font><br/>" + 
-                                                    "Lunges: " + maxLunge + "<br/>"+
-                                                    "Pushups: " + maxPushup + "<br/>"+
-                                                    "Situps: " + maxSitup + "<br/>" +
-                                                    "Squats: " + maxSquat + "<br/>" +
-                                                    "Burpees: " + maxBurpees + "<br/>";
+                                                    "Lunges: " + totalLunge + "<br/>"+
+                                                    "Pushups: " + totalPushup + "<br/>"+
+                                                    "Situps: " + totalSitup + "<br/>" +
+                                                    "Squats: " + totalSquat + "<br/>" +
+                                                    "Burpees: " + totalBurpees + "<br/>";
             if (deck1.head == null && deck2.head != null) {
                 outputString += "<br/><font size=\"+2\">Deck 2!</font><br/>";
                 while (deck2.head != null) {
@@ -222,80 +222,76 @@ public class WorkoutUno {
     public static String getWorkout(Hand hand, Deck deck) {
         int color = 0, skipNumber = 0, breakTime = 0;   //color workout& skip counter& 0 break time
         int type[] = {0, 0, 0, 0, 0};                //set all workouts to 0
+        boolean[] skipColors = new boolean[5];  //keeps track of colors that will have their workouts skipped
         String result = new String();
+        
+        for(int i = 0; i < hand.getHandSize(); i++){
+            if(hand.getHand()[i] != null && hand.getHand()[i].getType() == Card.Type.Reverse){
+                color = hand.getHand()[i].getColor().ordinal();
+                skipColors[color] = true; //sets the boolean to true if color should be skipped
+                hand.setHandIndex(i, null);
+            }
+        }
         for (int i = 0; i < hand.getHandSize(); i++) {
             if (hand.getHand()[i] != null) {
-                switch (hand.getHand()[i].getColor()) {
-                    case Green:
-                        color = 0;
-                        break;
-                    case Blue:
-                        color = 1;
-                        break;
-                    case Red:
-                        color = 2;
-                        break;
-                    case Yellow:
-                        color = 3;
-                        break;
-                    case Black:
-                        color = 4;
-                        break;
-                }
-                switch (hand.getHand()[i].getType()) {
-                    case Reverse:
-                        type[color] = 0;                 //ill tweak this up to push car to stack
-                        break;
-                    case Zero:
-                        breakTime += 1;             //Time for breaks
-                        type[color] += 0;            //add zero?
-                        break;
-                    case One:
-                        type[color] += 1;
-                        break;
-                    case Two:
-                        type[color] += 2;
-                        break;
-                    case Three:
-                        type[color] += 3;
-                        break;
-                    case Four:
-                        type[color] += 4;
-                        break;
-                    case Five:
-                        type[color] += 5;
-                        break;
-                    case Six:
-                        type[color] += 6;
-                        break;
-                    case Seven:
-                        type[color] += 7;
-                        break;
-                    case Eight:
-                        type[color] += 8;
-                        break;
-                    case Nine:
-                        type[color] += 9;
-                        break;
-                    case Skip:
-                        skipNumber += type[color];        //count how many there r to skip
-                        type[color] = 0;                 //nark all of this workout
-                        break;
-                    case Draw2:
-                        type[color] *= 2;                //buff all of this workout
-                        break;
-                    case Wild:
-                        type[color] += 10;               //add burpees to this hoe
-                        break;
-                    case Wild4: {
-                        type[color] += 10;
-                        type[0] *= 4;                   //multiply all workouts by 4
-                        type[1] *= 4;
-                        type[2] *= 4;
-                        type[3] *= 4;
+                color = hand.getHand()[i].getColor().ordinal(); //sets color to its enumerator declaration value
+                if(skipColors[color]){
+                    deck.push(hand.getHand()[i]);
+                    hand.setHandIndex(i, null);
+                    i=0;
+                }else{
+                    switch (hand.getHand()[i].getType()) {
+
+                        case Zero:
+                            breakTime += 1;             //Time for breaks
+                            break;
+                        case One:
+                            type[color] += 1;
+                            break;
+                        case Two:
+                            type[color] += 2;
+                            break;
+                        case Three:
+                            type[color] += 3;
+                            break;
+                        case Four:
+                            type[color] += 4;
+                            break;
+                        case Five:
+                            type[color] += 5;
+                            break;
+                        case Six:
+                            type[color] += 6;
+                            break;
+                        case Seven:
+                            type[color] += 7;
+                            break;
+                        case Eight:
+                            type[color] += 8;
+                            break;
+                        case Nine:
+                            type[color] += 9;
+                            break;
+                        case Skip:
+                            skipNumber += type[color];        //count how many there are to skip
+                            type[color] = 0;                 //nark all of this workout
+                            break;
+                        case Draw2:
+                            type[color] *= 2;                //buff all of this workout
+                            break;
+                        case Wild:
+                            type[color] += 10;               //add burpees to this workout
+                            break;
+                        case Wild4: {
+                            type[color] += 10;
+                            type[0] *= 4;                   //multiply all workouts by 4
+                            type[1] *= 4;
+                            type[2] *= 4;
+                            type[3] *= 4;
+                            type[4] *= 4;
+                            break;
+                        }
                     }
-                    break;
-                    
                 }
             }
         }
