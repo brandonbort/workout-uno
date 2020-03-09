@@ -1,4 +1,4 @@
-/*
+/**
  * AUTHOR: Aaron Sloan
  * FOR: CS 2365
  * COLLABORATOR: Brandon Bort
@@ -6,6 +6,8 @@
  * changed push and pop functions to change the variable to card. Added pushDeck 
  * function specifically for combining multiple decks together.
  *
+ * 
+ * 
  * TEST CASES for Class - Deck:
  *  Test case1: a class to create a deck
  *      Input: None
