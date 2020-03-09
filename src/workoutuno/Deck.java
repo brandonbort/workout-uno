@@ -98,7 +98,6 @@ public class Deck {
         Card card; // uno card
         Node next; // next pointer
         Node prev; // previous pointer
-        
         // constructor for each node 
         // in doubly-linked list
         Node(Card c)
