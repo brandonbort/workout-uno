@@ -1,7 +1,9 @@
 /*
  * AUTHOR: Brandon Bort
  * FOR: CS 2365 Project 2
- * COLLABORATORS: 
+ * COLLABORATORS: Brittney Taylor, Aaron Sloan, Airi Shimimura, Carlos Cuartas
+ * Contributions: Individual contributions are annotated in comments above each function,
+ * everything else is written by Brandon Bort
  */
 package workoutuno;
 
@@ -17,12 +19,12 @@ public class WorkoutUno {
 
     static int exerciseTotal, totalLunge,totalPushup,totalSitup,totalSquat,totalBurpees, maxSquat, maxPushup, maxSitup, maxLunge, maxBurpees = 0;
     static int squatSkipped, pushupSkipped, situpSkipped, lungeSkipped = 0;//added on another line to not have a huge line
+    //Contribution by Aaron Sloan for integration of Deck class
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
-
         UserInterface ui = new UserInterface();
         int[] options = new int[3];
         Object lock = new Object(); //lock object will pause thread until user enters input in GUI
@@ -116,6 +118,7 @@ public class WorkoutUno {
 
     }
 
+    //Written by Brandon Bort, returns the html string interpretation of a hand
     /**
      *
      * @param hand
@@ -148,6 +151,7 @@ public class WorkoutUno {
         return handString;
     }
 
+    //Cooperatively written by Brittney Taylor and Brandon Bort
     /**
      *
      * @param deck
@@ -172,6 +176,7 @@ public class WorkoutUno {
     }
 
     //BRBORT- this will accept a hand and output it to our chosen html file
+    //Main functionality written by Airi Shimimura
 
     /**
      *
@@ -255,7 +260,10 @@ public class WorkoutUno {
         }
         return deck;
     }
-
+    
+    
+    //Main functionality written by Carlos Cuartas, edited and integrated
+    //by Brandon Bort
     /**
      *
      * @param hand
