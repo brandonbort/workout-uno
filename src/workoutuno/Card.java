@@ -1,10 +1,19 @@
 //Carlos Cuartas
-//Help from Code Clique
+//FOR: CS 2365
+//Help from Code Clique and Brandon!
+//He did some minor touch ups to naming and bugs
 package workoutuno;
 /**
  * 
  * @author lolc4
  */
+
+/*
+TEST CASE
+Input: None
+Expected: Card&String
+Actual: Card&String
+*/
 public class Card {
     enum Color      //creates final variables for colors, like an array
     {
@@ -29,10 +38,16 @@ public class Card {
     private final Type type;
    
     /**
-     *
+     *Color of Card
      * @param color
      * @param type
      */
+    /*
+TEST CASE
+Input: color&type
+Expected: Card&String
+Actual: Card&String
+*/
     public Card(Color color, Type type)     
     {
         this.color=color;
@@ -41,18 +56,30 @@ public class Card {
     ////////////////////////////////////////////Gets here, idk if i need setters for card class
 
     /**
-     *
-     * @return
+     *getter
+     * @return color of card
      */
+    /*
+TEST CASE
+Input: None
+Expected: color
+Actual: color
+*/
 public Color getColor()
 {
     return this.color;
 }
 
     /**
-     *
-     * @return
+     *getter
+     * @return type and number
      */
+/*
+TEST CASE
+Input: None
+Expected: type  
+Actual: type
+*/
     public Type getType()
 {
     return this.type;
@@ -60,8 +87,14 @@ public Color getColor()
 
     /**
      *
-     * @return
+     * @return string statement to clarify
      */
+    /*
+TEST CASE
+Input: None
+Expected: String with color&type
+Actual: String with color&type
+*/
     public String toString()        //use this to call and make it easier to see what ur card is
 {
     return color+"_"+type;
