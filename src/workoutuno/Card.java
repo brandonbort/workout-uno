@@ -38,7 +38,7 @@ public class Card {
     private final Type type;
    
     /**
-     *Color of Card
+     *Constructor of Card
      * @param color
      * @param type
      */
