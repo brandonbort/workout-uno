@@ -299,7 +299,6 @@ public class WorkoutUno {
                     }
                     break;
                 }
-                 
             }
         }
         result += "<br />Lunges:        " + type[0]
