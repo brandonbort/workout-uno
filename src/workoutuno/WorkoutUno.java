@@ -21,6 +21,10 @@ public class WorkoutUno {
     static int squatSkipped, pushupSkipped, situpSkipped, lungeSkipped = 0;//added on another line to not have a huge line
     //Contribution by Aaron Sloan for integration of Deck class
     /**
+     * User Interface which prompts the user to select number of decks,
+     * wild cards or not, and whether to shuffle the decks as well.
+     * Calls the HTML function to display all the hands of the deck until 
+     * empty.
      * @param args the command line arguments
      */
     public static void main(String[] args) {
@@ -120,9 +124,9 @@ public class WorkoutUno {
 
     //Written by Brandon Bort, returns the html string interpretation of a hand
     /**
-     *
-     * @param hand
-     * @return
+     * Creates a string for displaying the hand within the HTML file.
+     * @param hand the hand to turn into a string for HTML file
+     * @return the dealt hand in the form of a string for HTML viewing
      */
     public static String stringifyHand(Hand hand) {
         String handString = new String();
@@ -153,8 +157,8 @@ public class WorkoutUno {
 
     //Cooperatively written by Brittney Taylor and Brandon Bort
     /**
-     *
-     * @param deck
+     * Shuffles the deck if selected by the user.
+     * @param deck the deck of cards that will be shuffled
      */
     public static void shuffle(Deck deck) {
         Card[] map = new Card[deck.getCardCount()];
@@ -179,9 +183,11 @@ public class WorkoutUno {
     //Main functionality written by Airi Shimimura
 
     /**
-     *
-     * @param output
-     * @throws FileNotFoundException
+     * Outputs the HTML file.
+     * @param output the HTML file that will contain the hands and workout for
+     * the hand
+     * @throws FileNotFoundException error is not expected to occur but if 
+     * file is not found it will create a new file of the same name
      */
     public static void outputToHtml(String output) throws FileNotFoundException {
         PrintStream outputStream = new PrintStream("output.html");
@@ -195,9 +201,9 @@ public class WorkoutUno {
     //-functionality written by airishimamura
 
     /**
-     *
-     * @param hand
-     * @param deck
+     * Drawing 7 cards from the deck to create the hand.
+     * @param hand the hand at which the cards that are dealt will be stored
+     * @param deck the deck used for dealing the hand
      */
     public static void drawHand(Hand hand, Deck deck) {
         int incrementor;
@@ -223,10 +229,10 @@ public class WorkoutUno {
     //if inclAct == 0, it will include action cards
 
     /**
-     *
-     * @param deck
-     * @param inclAct
-     * @return
+     * Adds additional cards based on user interface.
+     * @param deck the deck selected from user interface
+     * @param inclAct adds in action cards if selected by user interface
+     * @return the deck with or without action cards based on user interface
      */
     public static Deck addToDeck(Deck deck, int inclAct) {
         int maxSize;
@@ -265,10 +271,11 @@ public class WorkoutUno {
     //Main functionality written by Carlos Cuartas, edited and integrated
     //by Brandon Bort
     /**
-     *
-     * @param hand
-     * @param deck
-     * @return
+     * Creates the actual workout based on the color and type of card dealt in
+     * the hand.
+     * @param hand the hand which is dealt 
+     * @param deck the deck being used for dealing the hands
+     * @return a string of the final workout based on the hand
      */
     public static String getWorkout(Hand hand, Deck deck) {
         int color = 0;  //color workout& skip counter& 0 break time
