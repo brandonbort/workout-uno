@@ -5,6 +5,30 @@
  * CONTRIBUTION: constructor, sorting methods for color and type
  * Description: Hand class created as an array instantiation of Cards with unique
  * functions pertaining to necessary code execution
+
+//TEST CASE for sortColor
+//Test Case1:
+//Input: type, newHand, and handIndex 
+//Expected: None
+//Actual: None
+//
+//Test Case2:
+//Input: when one of variables get a wrong value
+//Expected: break
+//Actual: break
+//-----------------------------------------
+//TEST CASE for sortType
+//Test Case1:
+//Input: type, newHand, and index 
+//Expected: none
+//Actual: none
+
+//TEST CASE for sortType
+//Test Case2:
+//Input: When one of variables gets a wrong value
+//Expected: break
+//Actual: break
+
  */
 package workoutuno;
 
