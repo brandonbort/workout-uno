@@ -1,7 +1,7 @@
 /*
  * AUTHOR: Brandon Bort
  * FOR: CS 2365 Project 2
- * COLLABORATORS: Brittney Taylor, Aaron Sloan, Airi Shimimura, Carlos Cuartas
+ * COLLABORATORS: Brittney Taylor, Aaron Sloan, Airi Shimamura, Carlos Cuartas
  * Contributions: Individual contributions are annotated in comments above each function,
  * everything else is written by Brandon Bort
  */
@@ -180,12 +180,11 @@ public class WorkoutUno {
     }
 
     //BRBORT- this will accept a hand and output it to our chosen html file
-    //Main functionality written by Airi Shimimura
+    //Main functionality written by Airi Shimamura
 
     /**
      * Outputs the HTML file.
-     * @param output the HTML file that will contain the hands and workout for
-     * the hand
+     * @param output the String representation that will be written to the output file
      * @throws FileNotFoundException error is not expected to occur but if 
      * file is not found it will create a new file of the same name
      */
